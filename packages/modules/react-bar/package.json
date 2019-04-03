@@ -5,6 +5,7 @@
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
+  "chatappMain": "src",
   "scripts": {
     "build": "FORCE_COLOR=1 rollup -c",
     "watch": "FORCE_COLOR=1 rollup -c -w",

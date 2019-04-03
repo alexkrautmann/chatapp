@@ -8,4 +8,4 @@ const Outer = styled.Text`
   font-weight: bold;
 `;
 
-export const Biz = () => <View><Outer>bar <Inner /></Outer></View>
+export const Biz = () => <View><Outer>biz <Inner /></Outer></View>

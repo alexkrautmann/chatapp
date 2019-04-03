@@ -663,11 +663,12 @@
     universal-user-agent "^2.0.1"
 
 "@octokit/rest@^16.16.0":
-  version "16.22.0"
-  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-16.22.0.tgz#461770ae6f8b5a50a85f7d1b2752645c3e01ba6a"
-  integrity sha512-1PGUwDxLuG7AZsiKaIdxJr918jcZ1FtPX0kGqxoUlssn+fIzzlwQY623gnM8vY9c9jfASD+QUQmflHh3FwBthw==
+  version "16.23.2"
+  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-16.23.2.tgz#975e84610427c4ab6c41bec77c24aed9b7563db4"
+  integrity sha512-ZxiZMaCuqBG/IsbgNRVfGwYsvBb5DjHuMGjJgOrinT+/b+1j1U7PiGyRkHDJdjTGA6N/PsMC2lP2ZybX9579iA==
   dependencies:
     "@octokit/request" "2.4.2"
+    atob-lite "^2.0.0"
     before-after-hook "^1.4.0"
     btoa-lite "^1.0.0"
     deprecation "^1.0.1"
@@ -846,6 +847,11 @@ asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
   integrity sha1-x57Zf380y48robyXkLzDZkdLS3k=
+
+atob-lite@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/atob-lite/-/atob-lite-2.0.0.tgz#0fef5ad46f1bd7a8502c65727f0367d5ee43d696"
+  integrity sha1-D+9a1G8b16hQLGVyfwNn1e5D1pY=
 
 atob@^2.1.1:
   version "2.1.2"
@@ -1040,9 +1046,9 @@ camelcase@^4.1.0:
   integrity sha1-1UVjW+HjPFQmScaRc+Xeas+uNN0=
 
 camelcase@^5.0.0:
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-5.2.0.tgz#e7522abda5ed94cc0489e1b8466610e88404cf45"
-  integrity sha512-IXFsBS2pC+X0j0N/GE7Dm7j3bsEBp+oTpb7F50dwEVX7rf3IgwO9XatnegTsDtniKCUtEJH4fSU6Asw7uoVLfQ==
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-5.3.0.tgz#0a110882cbeba41f72f99fcf918f4a0a92a13ebf"
+  integrity sha512-Y05ICatFYPAfykDIB7VdwSJ0LUl1yq/BwO2OpyGGLjiRe1fgzTwVypPiWnzkGFOVFHXrCXUNBl86bpjBhZWSJg==
 
 caseless@~0.12.0:
   version "0.12.0"
@@ -4263,9 +4269,9 @@ typedarray@^0.0.6:
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
 uglify-js@^3.1.4:
-  version "3.5.2"
-  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.5.2.tgz#dc0c7ac2da0a4b7d15e84266818ff30e82529474"
-  integrity sha512-imog1WIsi9Yb56yRt5TfYVxGmnWs3WSGU73ieSOlMVFwhJCA9W8fqFFMMj4kgDqiS/80LGdsYnWL7O9UcjEBlg==
+  version "3.5.3"
+  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.5.3.tgz#d490bb5347f23025f0c1bc0dee901d98e4d6b063"
+  integrity sha512-rIQPT2UMDnk4jRX+w4WO84/pebU2jiLsjgIyrCktYgSvx28enOE3iYQMr+BD1rHiitWnDmpu0cY/LfIEpKcjcw==
   dependencies:
     commander "~2.19.0"
     source-map "~0.6.1"

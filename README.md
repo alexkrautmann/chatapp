@@ -8,4 +8,6 @@ Experimental.
 - [ ] GraphQL
 - [ ] Transpile next.js server
 - [ ] Serverless web-app
-- [ ] Storybook
+- [ ] Storybook Bug
+- [ ] Make storybook-config work as a storybook preset
+- [ ] Make babel-config usable as a babel preset

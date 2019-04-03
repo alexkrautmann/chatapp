@@ -6,11 +6,11 @@
     "modules:watch": "lerna run --parallel watch",
     "modules:typecheck": "lerna run --parallel typecheck",
     "modules:storybook": "yarn --cwd packages/configs/storybook-config storybook",
-    "web:dev": "yarn --cwd packages/web-app dev",
-    "web:build": "yarn --cwd packages/web-app build",
-    "web:start": "yarn --cwd packages/web-app start",
-    "native:start": "yarn --cwd packages/native-app start",
-    "native:run:android": "yarn --cwd packages/native-app run:android",
+    "web:dev": "yarn --cwd packages/apps/web-app dev",
+    "web:build": "yarn --cwd packages/apps/web-app build",
+    "web:start": "yarn --cwd packages/apps/web-app start",
+    "native:start": "yarn --cwd packages/apps/native-app start",
+    "native:run:android": "yarn --cwd packages/apps/native-app run:android",
     "clean": "rimraf node_modules yarn.lock packages/**/node_modules packages/**/yarn.lock"
   },
   "devDependencies": {
