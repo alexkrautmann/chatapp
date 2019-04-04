@@ -1,46 +1,71 @@
 import { Observer } from 'mobx-react';
-import React from 'react';
-import { Text, View } from 'react-native';
+import React, {FC} from 'react';
+import styled from 'styled-components/native';
 import { Button } from '../../components/button/Button';
 import { Counter } from '../../stores/Counter';
-import s from './Counter.scss';
 
-export const CounterScreen = () => {
-  return (
-    <Observer
-      render={() => (
-        <View style={s.counter} testID="COUNTER_SCREEN">
-          <View style={s.counter__content}>
-            <Text style={s.counter__text}>Counter: {Counter.counter}</Text>
-          </View>
 
-          <View style={s.counter__actions}>
-            <Button
-              title="Decrement"
-              onPress={Counter.decrement}
-              testID="BUTTON_DECREMENT"
-              style={s.counter__button}
-            />
+const CounterView = styled.View`
+  flex: 1;
+  padding: 16px;
+  background-color: #fff;
+`;
 
-            <View style={s.counter__spacer} />
+const CounterContent = styled.View`
+  margin-bottom: 16px;
+`;
 
-            <Button
-              title="Increment"
-              onPress={Counter.increment}
-              testID="BUTTON_INCREMENT"
-              style={s.counter__button}
-            />
-          </View>
-        </View>
-      )}
-    />
-  );
+const CounterText = styled.Text`
+  font-size: 21px;
+  font-weight: 200;
+`;
+
+const CounterActions = styled.View`
+  flex-direction: row;
+`;
+
+const CounterButton = styled(Button)`
+  flex: 1;
+`;
+
+const CounterSpacer = styled.View`
+  width: 16px;
+`;
+
+export const CounterScreen: FC = () => {
+    return (
+        <Observer
+            render={() => (
+                <CounterView testID="COUNTER_SCREEN">
+                    <CounterContent>
+                        <CounterText>Counter: {Counter.counter}</CounterText>
+                    </CounterContent>
+
+                    <CounterActions>
+                        <CounterButton
+                            title="Decrement"
+                            onPress={Counter.decrement}
+                            testID="BUTTON_DECREMENT"
+                        />
+
+                        <CounterSpacer />
+
+                        <CounterButton
+                            title="Increment"
+                            onPress={Counter.increment}
+                            testID="BUTTON_INCREMENT"
+                        />
+                    </CounterActions>
+                </CounterView>
+            )}
+        />
+    );
 };
 
 CounterScreen.options = {
-  topBar: {
-    title: {
-      text: 'Counter',
+    topBar: {
+        title: {
+            text: 'Counter',
+        },
     },
-  },
 };

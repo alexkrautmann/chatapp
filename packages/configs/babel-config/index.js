@@ -27,10 +27,11 @@ function getBabelConfig({ babelTarget = 'library' } = {}) {
   let sourceMaps = false;
 
   if (isWeb) {
-    presets.push([require.resolve('@babel/preset-typescript'), { isTSX: true, allExtensions: true }]);
     presets.push([require.resolve('next/babel'), { 'preset-env': babelPresetEnvOptions }]);
+    presets.push([require.resolve('@babel/preset-typescript'), { isTSX: true, allExtensions: true }]);
   } else if (isLib) {
     presets.push([require.resolve('@babel/preset-env'), babelPresetEnvOptions]);
+    presets.push([require.resolve('@babel/preset-typescript'), { isTSX: true, allExtensions: true }]);
     presets.push([require.resolve('@babel/preset-react')]);
   } else if (isNative) {
     presets.push([require.resolve('metro-react-native-babel-preset')]);

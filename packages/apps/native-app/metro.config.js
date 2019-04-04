@@ -1,4 +1,4 @@
-// Most of this config is to make metro handle symlinks
+// Most of this complex config is to make metro handle symlinks
 // much of it the code was taken from this longstanding issue
 // https://github.com/facebook/metro/issues/1
 
@@ -7,10 +7,8 @@ const fs        = require('fs');
 const blacklist = require('metro-config/src/defaults/blacklist');
 const getDefaultValues = require('metro-config/src/defaults').getDefaultValues;
 
-const defaultValues = getDefaultValues(__dirname);
-
 function resolvePath(...parts) {
-  var thisPath = path.resolve.apply(path, parts);
+  const thisPath = path.resolve.apply(path, parts);
   if (!fs.existsSync(thisPath))
     return;
 
@@ -26,9 +24,9 @@ function listDirectories(rootPath, cb) {
     if (fileName.charAt(0) === '.')
       return;
 
-    var fullFileName = path.join(rootPath, fileName),
-      stats = fs.lstatSync(fullFileName),
-      symbolic = false;
+    let fullFileName = path.join(rootPath, fileName);
+    let stats = fs.lstatSync(fullFileName);
+    let symbolic = false;
 
     if (stats.isSymbolicLink()) {
       fullFileName = resolvePath(fullFileName);
@@ -43,7 +41,7 @@ function listDirectories(rootPath, cb) {
     if (!stats.isDirectory())
       return;
 
-    var external = isExternalModule(fullFileName);
+    const external = isExternalModule(fullFileName);
     cb({ rootPath, symbolic, external, fullFileName, fileName });
   });
 }
@@ -52,8 +50,8 @@ function buildFullModuleMap(moduleRoot, mainModuleMap, externalModuleMap, _alrea
   if (!moduleRoot)
     return;
 
-  var alreadyVisited = _alreadyVisited || {},
-    prefix = _prefix;
+  const alreadyVisited = _alreadyVisited || {};
+  const prefix = _prefix;
 
   if (alreadyVisited && alreadyVisited.hasOwnProperty(moduleRoot))
     return;
@@ -62,8 +60,8 @@ function buildFullModuleMap(moduleRoot, mainModuleMap, externalModuleMap, _alrea
     if (symbolic)
       return buildFullModuleMap(resolvePath(fullFileName, 'node_modules'), mainModuleMap, externalModuleMap, alreadyVisited);
 
-    var moduleMap = (external) ? externalModuleMap : mainModuleMap,
-      moduleName = (prefix) ? path.join(prefix, fileName) : fileName;
+    const moduleMap = (external) ? externalModuleMap : mainModuleMap;
+    const moduleName = (prefix) ? path.join(prefix, fileName) : fileName;
 
     if (fileName.charAt(0) !== '@')
       moduleMap[moduleName] = fullFileName;
@@ -73,8 +71,8 @@ function buildFullModuleMap(moduleRoot, mainModuleMap, externalModuleMap, _alrea
 }
 
 function buildModuleResolutionMap(alternateRoots) {
-  var moduleMap = {},
-    externalModuleMap = {};
+  const moduleMap = {};
+  const externalModuleMap = {};
 
   buildFullModuleMap(baseModulePath, moduleMap, externalModuleMap);
 
@@ -92,7 +90,8 @@ function buildModuleResolutionMap(alternateRoots) {
 }
 
 function findAlernateRoots(moduleRoot = baseModulePath, alternateRoots = [], _alreadyVisited) {
-  var alreadyVisited = _alreadyVisited || {};
+  const alreadyVisited = _alreadyVisited || {};
+
   if (alreadyVisited && alreadyVisited.hasOwnProperty(moduleRoot))
     return;
 
@@ -111,7 +110,7 @@ function findAlernateRoots(moduleRoot = baseModulePath, alternateRoots = [], _al
 }
 
 function getPolyfillHelper() {
-  var getPolyfills;
+  let getPolyfills;
 
   // Get default react-native polyfills
   try {
@@ -137,8 +136,9 @@ const alternateRoots = findAlernateRoots();
 // build full module map for proper
 // resolution of modules in external roots
 const extraNodeModules = buildModuleResolutionMap(alternateRoots);
+const defaultValues = getDefaultValues(__dirname);
 
-// TODO: should we just watch alternateRoots and not just their src dir
+// TODO: should we just watch alternateRoots src dir instead of the whole thing?
 // const watchFolders = alternateRoots.map(alternateRoots =>`${alternateRoots}/src`);
 
 const moduleBlacklist = alternateRoots.map(
@@ -174,11 +174,12 @@ module.exports = {
       ...defaultValues.resolver.resolverMainFields,
     ]
   },
-  // TODO: if we don't point these to src, only watch the module "dist" folders
   watchFolders: alternateRoots,
   serializer: {
+    // uses default polyfills from react-native, and any custom ones defined in './polyfills.js' if it exists
     getPolyfills: getPolyfillHelper()
   },
+  // TODO: We want to remove this transformer since we don't want css modules
   transformer: {
     babelTransformerPath: "react-native-ueno-css-modules/transformer"
   },
