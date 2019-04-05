@@ -123,8 +123,16 @@ module.exports = withPlugins(
       config.resolve.alias = {
         ...(config.resolve.alias || {}),
         ...getMonoRepoAliases(),
+        // there should only be a single instance of styled-components
+        // https://www.styled-components.com/docs/faqs#why-am-i-getting-a-warning-about-several-instances-of-module-on-the-page
         'styled-components': path.resolve(__dirname, 'node_modules', 'styled-components'),
+        // similarily, set important react deps to use the web=app's versions
+        'react': path.resolve(__dirname, 'node_modules', 'react'),
+        'react-dom': path.resolve(__dirname, 'node_modules', 'react-dom'),
+        'react-native-web': path.resolve(__dirname, 'node_modules', 'react-native-web'),
+        // react-primitives technically does not need to use the web-app's version, but might as well treat it the same as other react deps
         'react-primitives': path.resolve(__dirname, 'node_modules', 'react-primitives'),
+        // 'react-native-web/dist/cjs/exports/StyleSheet/ReactNativeStyleResolver': require.resolve('react-native-web/dist/cjs/exports/StyleSheet/ReactNativeStyleResolver'),
       };
 
       if (!dev) {

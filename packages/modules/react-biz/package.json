@@ -14,7 +14,7 @@
   },
   "peerDependencies": {
     "react": "^16.8.6",
-    "react-primatives": "^0.7.0",
+    "react-primitives": "^0.7.0",
     "styled-components": "^4.2.0"
   },
   "optionalDependencies": {
