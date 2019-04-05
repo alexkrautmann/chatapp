@@ -18,8 +18,8 @@ function getJestConfig(projectDir) {
       // todo: put a PR into react-primitives for this?
       // 'react-native-web/dist/cjs/exports/StyleSheet/ReactNativeStyleResolver': 'react-native-web/dist/cjs/exports/StyleSheet/styleResolver.js',
       // these polyfills might not be brought in properly in a package or it's deps, so point them to jest-config's deps
-      'core-js/modules/(.+)': `${__dirname}/node_modules/core-js/modules/$1`,
       'regenerator-runtime/(.+)': `${__dirname}/node_modules/regenerator-runtime/$1`,
+      '^core-js/modules/(.+)': `${__dirname}/node_modules/core-js/modules/$1`
     },
     transform: {
       // we create our own babel transformer so we can pass our own config from @chatapp/babel-config

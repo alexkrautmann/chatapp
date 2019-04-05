@@ -1,8 +1,8 @@
 import * as React from "react";
-import { Bar } from './'
+import { Whatever } from './'
 
 describe('bar', () => {
     it('exists', async () => {
-        expect(<Bar />).toBeDefined();
+        expect(<Whatever />).toBeDefined();
     });
 });

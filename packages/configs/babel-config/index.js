@@ -12,7 +12,7 @@ const babelPresetEnvOptions = {
   useBuiltIns: 'usage',
   // todo: consider switching to external browserslist config
   targets: { browsers: 'cover 96%, not ie < 9, not chrome < 40' },
-  // corejs: '3.0.0',
+  corejs: '3.0.0',
 };
 
 function getBabelConfig({ babelTarget = 'library' } = {}) {
@@ -27,6 +27,8 @@ function getBabelConfig({ babelTarget = 'library' } = {}) {
   let sourceMaps = false;
 
   if (isWeb) {
+    // for some reason next/babel does not accept corejs as an option
+    delete babelPresetEnvOptions.corejs;
     presets.push([require.resolve('next/babel'), { 'preset-env': babelPresetEnvOptions }]);
     presets.push([require.resolve('@babel/preset-typescript'), { isTSX: true, allExtensions: true }]);
   } else if (isLib) {
