@@ -8,12 +8,13 @@ function getJestConfig(projectDir) {
     // use package name for suite name in jest runner
     displayName: pkg.name,
     // test files under src that end in ".spec.ext"
-    testMatch: ['<rootDir>/src/**/*.spec.[jt]s?(x)'],
+    testMatch: ['<rootDir>/**/*.spec.[jt]s?(x)'],
     // allow jest to handle ts/tsx
     moduleFileExtensions: [...defaults.moduleFileExtensions, 'ts', 'tsx'],
     moduleNameMapper: {
       // point inter-monorepo deps at each other's src
-      '@chatapp/(.+)': '<rootDir>/../$1/src',
+      // TODO: might need to define a custom jest resolver to handle imports from things outside packages/modules
+      '@chatapp/(.+)': '<rootDir>/../../modules/$1/src',
       // latest react-native and react-native-web renamed this file
       // todo: put a PR into react-primitives for this?
       // 'react-native-web/dist/cjs/exports/StyleSheet/ReactNativeStyleResolver': 'react-native-web/dist/cjs/exports/StyleSheet/styleResolver.js',

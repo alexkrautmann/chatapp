@@ -18,8 +18,9 @@ module.exports = {
   projects: [
     // "<rootDir>",
     '<rootDir>/packages/modules/*',
+    '<rootDir>/packages/apps/web-app',
     // "<rootDir>/packages/*",
   ],
-  testPathIgnorePatterns: ['<rootDir>/packages-old', '/node_modules/'],
+  testPathIgnorePatterns: ['/node_modules/'],
   ...(collectCoverage ? coverageConfig : {}),
 };

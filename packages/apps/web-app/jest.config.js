@@ -1,3 +1,3 @@
-const { getJestConfig } = require('../../tools/getJestConfig');
+const { getJestConfig } = require('@chatapp/jest-config');
 
-module.exports = getJestConfig({ projectDir: __dirname });
+module.exports = getJestConfig(__dirname);
