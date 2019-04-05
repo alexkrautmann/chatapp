@@ -1,5 +1,5 @@
 import { Observer } from 'mobx-react';
-import React, {FC} from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components/native';
 import { Button } from '../../components/button/Button';
 import { Counter } from '../../stores/Counter';
@@ -32,40 +32,41 @@ const CounterSpacer = styled.View`
   width: 16px;
 `;
 
-export const CounterScreen: FC = () => {
-    return (
-        <Observer
-            render={() => (
-                <CounterView testID="COUNTER_SCREEN">
-                    <CounterContent>
-                        <CounterText>Counter: {Counter.counter}</CounterText>
-                    </CounterContent>
+export const CounterScreen: FC = () => (
+  <Observer
+    render={() => (
+      <CounterView testID="COUNTER_SCREEN">
+        <CounterContent>
+          <CounterText>
+Counter:
+            {Counter.counter}
+          </CounterText>
+        </CounterContent>
 
-                    <CounterActions>
-                        <CounterButton
-                            title="Decrement"
-                            onPress={Counter.decrement}
-                            testID="BUTTON_DECREMENT"
-                        />
+        <CounterActions>
+          <CounterButton
+            title="Decrement"
+            onPress={Counter.decrement}
+            testID="BUTTON_DECREMENT"
+          />
 
-                        <CounterSpacer />
+          <CounterSpacer />
 
-                        <CounterButton
-                            title="Increment"
-                            onPress={Counter.increment}
-                            testID="BUTTON_INCREMENT"
-                        />
-                    </CounterActions>
-                </CounterView>
-            )}
-        />
-    );
-};
+          <CounterButton
+            title="Increment"
+            onPress={Counter.increment}
+            testID="BUTTON_INCREMENT"
+          />
+        </CounterActions>
+      </CounterView>
+    )}
+  />
+);
 
 CounterScreen.options = {
-    topBar: {
-        title: {
-            text: 'Counter',
-        },
+  topBar: {
+    title: {
+      text: 'Counter',
     },
+  },
 };

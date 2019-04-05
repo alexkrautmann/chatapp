@@ -1,8 +1,8 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Whatever } from './';
+import { Whatever } from '.';
 
 storiesOf('Modules|Whatever', module)
-    .add('default', () => (
-        <Whatever />
-    ));
+  .add('default', () => (
+    <Whatever />
+  ));

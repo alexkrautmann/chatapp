@@ -1,7 +1,7 @@
-import { foo } from './'
+import { foo } from '.';
 
 describe('foo', () => {
-    it('exists', async () => {
-        expect(foo).toEqual('foo');
-    });
+  it('exists', async () => {
+    expect(foo).toEqual('foo');
+  });
 });

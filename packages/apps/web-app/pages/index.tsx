@@ -1,9 +1,9 @@
-import * as React from "react";
-import {foo} from '@chatapp/foo'
-import {Bar} from '@chatapp/react-bar'
-import styled from 'styled-components'
-import {Biz} from "@chatapp/react-biz";
-import {Spaghet} from "../components/spaghet";
+import * as React from 'react';
+import { foo } from '@chatapp/foo';
+import { Bar } from '@chatapp/react-bar';
+import styled from 'styled-components';
+import { Biz } from '@chatapp/react-biz';
+import { Spaghet } from '../components/spaghet';
 
 const Container = styled.div`
   display: flex;
@@ -18,22 +18,22 @@ const Item = styled.div`
 
 export default () => (
   <Container>
-      <Item>
+    <Item>
           Imported .ts file
-          <div>{foo}</div>
-      </Item>
-      <Item>
+      <div>{foo}</div>
+    </Item>
+    <Item>
           Imported .tsx file
-          <Bar />
-      </Item>
-      <Item>
+      <Bar />
+    </Item>
+    <Item>
           Imported primitives .tsx file
-          <Biz />
-      </Item>
-      <Item>
+      <Biz />
+    </Item>
+    <Item>
           Imported from nested .tsx file
-          <Spaghet />
-      </Item>
+      <Spaghet />
+    </Item>
   </Container>
 
-)
+);

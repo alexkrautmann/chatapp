@@ -5,9 +5,7 @@ import { Counter } from './stores/Counter';
 import './utils/setup';
 
 // Register screens
-Screens.forEach((ScreenComponent, key) =>
-  Navigation.registerComponent(key, () => ScreenComponent)
-);
+Screens.forEach((ScreenComponent, key) => Navigation.registerComponent(key, () => ScreenComponent));
 
 // Make inspectable
 if (__DEV__) {

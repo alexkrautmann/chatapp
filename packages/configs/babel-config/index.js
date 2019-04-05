@@ -1,6 +1,6 @@
 const path = require('path');
 
-const env = process.env;
+const { env } = process;
 const isTest = env.NODE_ENV === 'test';
 const isDev = env.NODE_ENV === 'development';
 
@@ -22,7 +22,7 @@ function getBabelConfig({ babelTarget = 'library' } = {}) {
 
   const presets = [];
   const plugins = [
-    [require.resolve('babel-plugin-styled-components')]
+    [require.resolve('babel-plugin-styled-components')],
   ];
   let sourceMaps = false;
 

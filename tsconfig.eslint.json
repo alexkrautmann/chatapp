@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@chatapp/*": ["packages/modules/*/src", "packages/config/*"]
+    }
+  }
+}

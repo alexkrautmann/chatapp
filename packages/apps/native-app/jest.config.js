@@ -37,8 +37,7 @@ const pkg = require('./package');
 
 module.exports = {
   displayName: pkg.name,
-  "testPathIgnorePatterns": ["<rootDir>"],
+  testPathIgnorePatterns: ['<rootDir>'],
   testMatch: ['<rootDir>/src/**/?(*.)spec.[jt]s?(x)'],
-  rootDir: './'
+  rootDir: './',
 };
-

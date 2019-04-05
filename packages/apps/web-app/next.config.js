@@ -1,6 +1,5 @@
 const path = require('path');
 const fs = require('fs');
-const nativeAppPackageJson = require('./package');
 const withTypescript = require('@zeit/next-typescript');
 const withBundleAnalyzer = require('@zeit/next-bundle-analyzer');
 const withProgressBar = require('next-progressbar');
@@ -10,6 +9,7 @@ const withPlugins = require('next-compose-plugins');
 const StatsPlugin = require('stats-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const nativeAppPackageJson = require('./package');
 
 function getMonoRepoAliases() {
   const packagesPath = path.resolve(__dirname, '../..');
@@ -25,7 +25,7 @@ function getMonoRepoAliases() {
           aliases[packageName] = path.resolve(packagePath, 'src');
         }
       }
-    })
+    });
   });
   return aliases;
 }
@@ -47,11 +47,11 @@ module.exports = withPlugins(
         // '/Users/alex/repos/misc/chatapp/packages/modules/foo',
         // '/Users/alex/repos/misc/chatapp/packages/modules/react-biz',
         // '/Users/alex/repos/misc/chatapp/packages/modules/react-bar',
-      ]
+      ],
     }],
     [withProgressBar, {
       progressBar: {
-        profile: process.env.NODE_ENV === 'production'
+        profile: process.env.NODE_ENV === 'production',
       },
     }],
     [withBundleAnalyzer, {
@@ -63,13 +63,13 @@ module.exports = withPlugins(
         server: {
           openAnalyzer: false,
           analyzerMode: 'static',
-          reportFilename: '../../reports/webpack/server/analysis.html'
+          reportFilename: '../../reports/webpack/server/analysis.html',
         },
         browser: {
           openAnalyzer: false,
           analyzerMode: 'static',
-          reportFilename: '../reports/webpack/client/analysis.html'
-        }
+          reportFilename: '../reports/webpack/client/analysis.html',
+        },
       },
     }],
     withSize,
@@ -77,7 +77,6 @@ module.exports = withPlugins(
   ],
   {
     webpack(config, { dev, isServer }) {
-
       // config.module.rules.push({
       //   test: /\.js$/,
       //   use: ["source-map-loader"],
@@ -127,7 +126,7 @@ module.exports = withPlugins(
         // https://www.styled-components.com/docs/faqs#why-am-i-getting-a-warning-about-several-instances-of-module-on-the-page
         'styled-components': path.resolve(__dirname, 'node_modules', 'styled-components'),
         // similarily, set important react deps to use the web=app's versions
-        'react': path.resolve(__dirname, 'node_modules', 'react'),
+        react: path.resolve(__dirname, 'node_modules', 'react'),
         'react-dom': path.resolve(__dirname, 'node_modules', 'react-dom'),
         'react-native-web': path.resolve(__dirname, 'node_modules', 'react-native-web'),
         // react-primitives technically does not need to use the web-app's version, but might as well treat it the same as other react deps
@@ -143,7 +142,7 @@ module.exports = withPlugins(
         );
       }
 
-      return config
+      return config;
     },
-  }
+  },
 );

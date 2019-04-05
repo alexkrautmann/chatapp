@@ -11,15 +11,14 @@ transformer.getCacheKey = (
   filename,
   configString,
   { config, instrument, rootDir },
-) =>
-  oldGetCacheKey(
-    fileData,
-    filename,
-    configString, {
-      config: config || { cwd: defaultCwd },
-      instrument,
-      rootDir,
-    },
-  );
+) => oldGetCacheKey(
+  fileData,
+  filename,
+  configString, {
+    config: config || { cwd: defaultCwd },
+    instrument,
+    rootDir,
+  },
+);
 
 module.exports = transformer;

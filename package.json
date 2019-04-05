@@ -13,13 +13,16 @@
     "native:run:android": "yarn --cwd packages/apps/native-app run:android",
     "clean": "rimraf node_modules yarn.lock packages/**/node_modules packages/**/yarn.lock",
     "lint": "yarn lint:eslint",
-    "lint:eslint": "eslint --ext .js,.jsx,.ts,.tsx ./"
+    "lint:eslint": "eslint --ext .js,.jsx,.ts,.tsx ./",
+    "format": "yarn lint:eslint --fix"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^1.0.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-typescript": "^1.1.0",
+    "eslint-import-resolver-typescript": "^1.1.1",
     "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^22.4.1",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-monorepo": "^0.2.1",
     "eslint-plugin-react": "^7.11.0",

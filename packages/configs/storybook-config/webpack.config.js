@@ -12,11 +12,11 @@ module.exports = ({ config }) => {
         loader: require.resolve('babel-loader'),
         options: {
           cacheDirectory: path.resolve(__dirname, 'node_modules', '.cache', 'storybook'),
-          ...getBabelConfig({ babelTarget: 'library' })
-        }
+          ...getBabelConfig({ babelTarget: 'library' }),
+        },
       },
-      require.resolve('react-docgen-typescript-loader')
-    ]
+      require.resolve('react-docgen-typescript-loader'),
+    ],
   });
 
   config.resolve.extensions.push('.ts', '.tsx');

@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, { FC } from 'react';
 import { Navigation } from 'react-native-navigation';
 import { foo } from '@chatapp/foo';
 import { Biz } from '@chatapp/react-biz';
@@ -25,7 +25,7 @@ const HomeText = styled.Text`
 `;
 
 interface HomeScreenProps {
-  componentId: any
+  componentId: any;
 }
 
 export const HomeScreen: FC<HomeScreenProps> = ({ componentId }) => {
@@ -42,9 +42,12 @@ export const HomeScreen: FC<HomeScreenProps> = ({ componentId }) => {
       <HomeContent>
         <HomeLogo source={Logo} resizeMode="contain" />
 
-        <HomeText>Welcome Home {foo}</HomeText>
+        <HomeText>
+Welcome Home
+          {foo}
+        </HomeText>
 
-        <Biz/>
+        <Biz />
       </HomeContent>
 
       <Button onPress={onCounterScreenPress} title="Counter Screen" />
