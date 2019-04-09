@@ -6,5 +6,9 @@
       "@chatapp/*": ["../../modules/*/src", "../../config/*"]
     }
   },
-  "include": ["pages", "components"]
+  "include": [
+    "pages",
+    "components",
+    "server"
+  ]
 }

@@ -7,9 +7,7 @@ const withTranspileModules = require('next-transpile-modules');
 const withSize = require('next-size');
 const withPlugins = require('next-compose-plugins');
 const StatsPlugin = require('stats-webpack-plugin');
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-const nativeAppPackageJson = require('./package');
+const webAppPackageJson = require('./package');
 
 function getMonoRepoAliases() {
   const packagesPath = path.resolve(__dirname, '../..');
@@ -19,10 +17,23 @@ function getMonoRepoAliases() {
     fs.readdirSync(packageTypePath).forEach((dir2) => {
       if (!dir2.startsWith('.')) {
         const packagePath = path.resolve(packageTypePath, dir2);
+        // TODO UNSAFE REQUIRE! (try-catch)
         const packageName = require(`${packagePath}/package.json`).name;
-        if (Object.keys(nativeAppPackageJson.dependencies).includes(packageName)) {
-          // aliases[packageName] = path.resolve(packagePath);
-          aliases[packageName] = path.resolve(packagePath, 'src');
+        if (Object.keys(webAppPackageJson.dependencies).includes(packageName)) {
+          const packageSrcPath = path.resolve(packagePath, 'src');
+          try {
+            // throws if not found
+            require.resolve(packageSrcPath);
+            aliases[packageName] = packageSrcPath;
+          } catch (srcError) {
+            // src folder not resolved, see if package can be resolved without src
+            try {
+              require.resolve(packagePath);
+              aliases[packageName] = packagePath;
+            } catch (rootError) {
+              console.error(`Could not resolve module for "${packageName}"`, rootError);
+            }
+          }
         }
       }
     });
@@ -33,20 +44,8 @@ function getMonoRepoAliases() {
 module.exports = withPlugins(
   [
     [withTranspileModules, {
-      // tsconfig-paths-webpack-plugin aliases @chatapp/* imports to their absolute paths so we
-      // need to use this next plugin to set next.js webpack config to transpile monorepo deps
       transpileModules: [
-        '/Users/alex/repos/misc/chatapp/packages/modules/react-biz/src/index.tsx',
-        '/Users/alex/repos/misc/chatapp/packages/modules/react-biz/src/Inner.tsx',
-        '/Users/alex/repos/misc/chatapp/packages/modules/react-bar/src/index.tsx',
-        '/Users/alex/repos/misc/chatapp/packages/modules/foo/src/index.ts',
-        // path.resolve(__dirname, '..', '..', 'modules'),
-        // path.resolve(__dirname, '..', '..', 'modules', 'foo'),
-        // path.resolve(__dirname, '..', '..', 'modules', 'react-bar'),
-        // path.resolve(__dirname, '..', '..', 'modules', 'react-biz'),
-        // '/Users/alex/repos/misc/chatapp/packages/modules/foo',
-        // '/Users/alex/repos/misc/chatapp/packages/modules/react-biz',
-        // '/Users/alex/repos/misc/chatapp/packages/modules/react-bar',
+        path.resolve(__dirname, '..', '..', 'modules'),
       ],
     }],
     [withProgressBar, {
@@ -76,6 +75,8 @@ module.exports = withPlugins(
     withTypescript,
   ],
   {
+    // distDir: '../.next',
+    // distDir: `${path.relative(__dirname, process.cwd())}/.next`,
     webpack(config, { dev, isServer }) {
       // config.module.rules.push({
       //   test: /\.js$/,
@@ -90,59 +91,46 @@ module.exports = withPlugins(
       //   );
       // }
 
-      // const mainFields = [
-      //   'chatappMain',
-      //   ...config.resolve.mainFields
-      // ];
-      //
-      // config.resolve.mainFields = mainFields;
-      // config.resolve.aliasFields = mainFields;
-
-      // config.resolve.extensions = [
-      //   '.ts',
-      //   '.tsx',
-      //   '.mjs',
-      //   '.wasm',
-      //   '.js',
-      //   '.jsx',
-      //   '.json',
-      //   // '*'
-      // ];
-
-      // TODO: document tsconfig-paths-webpack-plugin
-      // config.resolve.plugins = [
-      //   ...(config.resolve.plugins || []),
-      //   new TsconfigPathsPlugin({
-      //     configFile: path.resolve(__dirname, 'tsconfig.json'),
-      //     // mainFields,
-      //     logLevel: 'info'
-      //   })
-      // ];
-
-      config.resolve.alias = {
-        ...(config.resolve.alias || {}),
-        ...getMonoRepoAliases(),
-        // there should only be a single instance of styled-components
-        // https://www.styled-components.com/docs/faqs#why-am-i-getting-a-warning-about-several-instances-of-module-on-the-page
-        'styled-components': path.resolve(__dirname, 'node_modules', 'styled-components'),
-        // similarily, set important react deps to use the web=app's versions
-        react: path.resolve(__dirname, 'node_modules', 'react'),
-        'react-dom': path.resolve(__dirname, 'node_modules', 'react-dom'),
-        'react-native-web': path.resolve(__dirname, 'node_modules', 'react-native-web'),
-        // react-primitives technically does not need to use the web-app's version, but might as well treat it the same as other react deps
-        'react-primitives': path.resolve(__dirname, 'node_modules', 'react-primitives'),
-        // 'react-native-web/dist/cjs/exports/StyleSheet/ReactNativeStyleResolver': require.resolve('react-native-web/dist/cjs/exports/StyleSheet/ReactNativeStyleResolver'),
+      const entry = async () => {
+        const entries = await config.entry();
+        // ignore spec files
+        Object.keys(entries).forEach((key) => {
+          if (key.includes('.spec.js')) {
+            delete entries[key];
+          }
+        });
+        return entries;
       };
 
-      if (!dev) {
-        config.plugins.push(
-          isServer
-            ? new StatsPlugin('../../reports/webpack/server/stats.json')
-            : new StatsPlugin('../reports/webpack/client/stats.json'),
-        );
-      }
+      const resolve = {
+        ...(config.resolve || {}),
+        alias: {
+          ...(config.resolve.alias || {}),
+          ...getMonoRepoAliases(),
+          // there should only be a single instance of styled-components
+          // https://www.styled-components.com/docs/faqs#why-am-i-getting-a-warning-about-several-instances-of-module-on-the-page
+          'styled-components': path.resolve(__dirname, 'node_modules', 'styled-components'),
+          // similarily, set important react deps to use the web=app's versions
+          react: path.resolve(__dirname, 'node_modules', 'react'),
+          'react-dom': path.resolve(__dirname, 'node_modules', 'react-dom'),
+          'react-native-web': path.resolve(__dirname, 'node_modules', 'react-native-web'),
+          'react-primitives': path.resolve(__dirname, 'node_modules', 'react-primitives'),
+        },
+      };
 
-      return config;
+      const plugins = [
+        ...(config.plugins || {}),
+        !dev && (
+          isServer ? new StatsPlugin('../../reports/webpack/server/stats.json') : new StatsPlugin('../reports/webpack/client/stats.json')
+        ),
+      ].filter(plugin => typeof plugin === 'object');
+
+      return {
+        ...config,
+        entry,
+        resolve,
+        plugins,
+      };
     },
   },
 );

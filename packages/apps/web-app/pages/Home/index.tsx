@@ -3,7 +3,7 @@ import { foo } from '@chatapp/foo';
 import { Bar } from '@chatapp/react-bar';
 import styled from 'styled-components';
 import { Biz } from '@chatapp/react-biz';
-import { Spaghet } from '../components/spaghet';
+import { Spaghet } from '../../components/spaghet';
 
 const Container = styled.div`
   display: flex;
@@ -19,6 +19,7 @@ const Item = styled.div`
 export default () => (
   <Container>
     <Item>
+        Hello!
           Imported .ts file
       <div>{foo}</div>
     </Item>
@@ -35,5 +36,4 @@ export default () => (
       <Spaghet />
     </Item>
   </Container>
-
 );

@@ -44,6 +44,13 @@ module.exports = {
       rules: {
         'import/no-extraneous-dependencies': ['error', { devDependencies: true }]
       }
+    },
+    {
+      // next.js requires default exports for pages
+      "files": ["packages/apps/web-app/pages/**/*.ts", "packages/apps/web-app/pages/**/*.tsx"],
+      rules: {
+        'import/no-default-export': ['off']
+      }
     }
   ]
 };
