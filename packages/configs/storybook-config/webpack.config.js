@@ -38,7 +38,6 @@ function getMonoRepoAliases() {
 }
 
 module.exports = ({ config }) => {
-
   config.module.rules.push({
     test: /\.tsx?$/,
     exclude: /node_modules/,

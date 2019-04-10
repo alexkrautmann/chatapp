@@ -31,7 +31,9 @@ const ButtonText = styled.Text<ButtonProps>`
   color: ${props => (props.disabled ? '#b8b8b8' : '#000')};
 `;
 
-export const Button: FC<ButtonProps> = ({title, accessibilityLabel, disabled, onPress, hasTVPreferredFocus, testID}) => {
+export const Button: FC<ButtonProps> = ({
+  title, accessibilityLabel, disabled, onPress, hasTVPreferredFocus, testID,
+}) => {
   const accessibilityTraits: AccessibilityTrait[] = ['button'];
 
   if (disabled) {
