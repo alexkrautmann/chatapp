@@ -2,12 +2,14 @@
   "name": "@chatapp/storybook-config",
   "version": "0.0.0",
   "scripts": {
-    "storybook": "start-storybook -p 1337 -c .",
-    "build-storybook": "build-storybook -c ."
+    "storybook": "NODE_OPTIONS=\"--max_old_space_size=8192\" start-storybook -p 1337 -c .",
+    "build-storybook": "NODE_OPTIONS=\"--max_old_space_size=8192\" build-storybook -c . -o dist"
   },
   "dependencies": {
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-native-web": "0.11.1",
+    "react-primitives": "^0.7.0",
     "styled-components": "^4.2.0"
   },
   "devDependencies": {
