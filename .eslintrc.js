@@ -19,22 +19,12 @@ module.exports = {
   },
   "overrides": [
     {
-      "files": ["*.ts", '*.tsx'],
-      "rules": {
-        ...typescriptEslintPlugin.configs.recommended.rules,
-        'import/no-default-export': ['error'],
-        '@typescript-eslint/indent': ['error', 2],
-        '@typescript-eslint/camelcase': ['error', { properties: 'never' }]
-      }
-    },
-    {
       "files": ["*.spec.ts", "*.spec.tsx"],
       plugins: ['jest'],
       env: {
         'jest': true
       },
       rules: {
-        ...eslintPluginJest.configs.recommended.rules,
         ...eslintPluginJest.configs.recommended.rules,
       }
     },
