@@ -21,8 +21,8 @@ function importAll(r) {
 // const req = require.context('../../modules', true, /((?!node_modules\/|dist\/).)*\.stories\.[jt]sx?$/);
 // const req = require.context('../../', true, /^((?![\\/]node_modules|vendor[\\/]).)*\.md$/);
 // This makes the build really slow :(
-const reqConfigs = require.context('../../modules', true, /((?!node_modules[\\/]).)*\.stories\.tsx?$/);
-const reqApps = require.context('../../modules', true, /((?!node_modules[\\/]).)*\.stories\.tsx?$/);
+const reqConfigs = require.context('../../configs', true, /((?!node_modules[\\/]).)*\.stories\.tsx?$/);
+const reqApps = require.context('../../apps', true, /((?!node_modules[\\/]).)*\.stories\.tsx?$/);
 const reqModules = require.context('../../modules', true, /((?!node_modules[\\/]).)*\.stories\.tsx?$/);
 function loadStories() {
   require('./stories/welcome1.jsx');
