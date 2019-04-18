@@ -20,19 +20,13 @@ function getMonoRepoAliases() {
         // TODO UNSAFE REQUIRE! (try-catch)
         const packageName = require(`${packagePath}/package.json`).name;
         if (Object.keys(webAppPackageJson.dependencies).includes(packageName)) {
+          // aliases[packageName] = path.resolve(packagePath);
+          // aliases[packageName] = path.resolve(packagePath, 'src');
           const packageSrcPath = path.resolve(packagePath, 'src');
-          try {
-            // throws if not found
-            require.resolve(packageSrcPath);
+          if (fs.existsSync(packageSrcPath)) {
             aliases[packageName] = packageSrcPath;
-          } catch (srcError) {
-            // src folder not resolved, see if package can be resolved without src
-            try {
-              require.resolve(packagePath);
-              aliases[packageName] = packagePath;
-            } catch (rootError) {
-              console.error(`Could not resolve module for "${packageName}"`, rootError);
-            }
+          } else {
+            aliases[packageName] = packagePath;
           }
         }
       }
