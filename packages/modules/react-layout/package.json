@@ -1,0 +1,45 @@
+{
+  "name": "@chatapp/react-layout",
+  "version": "0.0.0",
+  "license": "ISC",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "chatappMain": "src",
+  "scripts": {
+    "build": "FORCE_COLOR=1 rollup -c",
+    "watch": "FORCE_COLOR=1 rollup -c -w",
+    "typecheck": "tsc --pretty",
+    "test": "jest"
+  },
+  "peerDependencies": {
+    "react": "^16.8.6",
+    "react-primitives": "^0.7.0",
+    "styled-components": "^4.2.0"
+  },
+  "optionalDependencies": {
+    "react-dom": "^16.8.6",
+    "react-native": "^0.59.2",
+    "react-native-web": "0.11.1"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@chatapp/jest-config": "^0.0.0",
+    "@chatapp/rollup-config": "0.0.0",
+    "@storybook/react": "5.0.6",
+    "@types/jest": "^24.0.11",
+    "@types/react": "^16.8.10",
+    "@types/react-dom": "^16.8.2",
+    "@types/react-primitives": "^0.6.2",
+    "@types/storybook__react": "^4.0.1",
+    "@types/styled-components": "^4.1.12",
+    "jest": "^24.5.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-native-web": "0.11.1",
+    "react-primitives": "^0.7.0",
+    "rollup": "^1.7.4",
+    "styled-components": "^4.2.0",
+    "typescript": "^3.4.1"
+  }
+}
